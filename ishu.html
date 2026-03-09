@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For Ishika ❤️</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+height:100vh;
+background: linear-gradient(135deg,#ff6a88,#ff99ac);
+display:flex;
+align-items:center;
+justify-content:center;
+overflow:hidden;
+color:white;
+}
+
+.container{
+text-align:center;
+background:rgba(0,0,0,0.35);
+padding:40px;
+border-radius:20px;
+max-width:420px;
+}
+
+h1{
+font-size:30px;
+margin-bottom:20px;
+}
+
+#message{
+font-size:18px;
+line-height:1.6;
+min-height:150px;
+}
+
+.buttons{
+margin-top:25px;
+}
+
+button{
+padding:12px 22px;
+font-size:16px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+margin:10px;
+}
+
+#yes{
+background:#00c853;
+color:white;
+}
+
+#no{
+background:#ff3d3d;
+color:white;
+position:absolute;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+pointer-events:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<canvas id="hearts"></canvas>
+
+<div class="container">
+
+<h1>I'm Sorry Ishika ❤️</h1>
+
+<div id="message"></div>
+
+<div class="buttons">
+
+<button id="yes">Forgive Me Ishu ❤️</button>
+<button id="no">Still Angry 😡</button>
+
+</div>
+
+</div>
+
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8c2a0b9c03.mp3?filename=romantic-background-11285.mp3">
+</audio>
+
+<script>
+
+/* TYPEWRITER MESSAGE */
+
+const text = `Hey Ishu ❤️
+
+I know you're upset with me,
+and honestly I hate the fact that I made my jaan sad.
+
+You mean so much to me.
+More than words can ever explain.
+
+If life was a program,
+you would be the most important line of code in it.
+
+Without you everything just feels incomplete.
+
+I'm really sorry Ishu.
+Please forgive your stupid developer boyfriend
+and let me make my jaan smile again. ❤️`;
+
+let i = 0;
+
+function typeWriter(){
+
+if(i < text.length){
+
+document.getElementById("message").innerHTML += text.charAt(i);
+
+i++;
+
+setTimeout(typeWriter,35);
+
+}
+
+}
+
+typeWriter();
+
+/* RUN AWAY BUTTON */
+
+const noBtn = document.getElementById("no");
+
+noBtn.addEventListener("mouseover", ()=>{
+
+const x = Math.random()*window.innerWidth*0.8;
+
+const y = Math.random()*window.innerHeight*0.8;
+
+noBtn.style.left = x+"px";
+noBtn.style.top = y+"px";
+
+});
+
+/* CONFETTI */
+
+document.getElementById("yes").onclick = function(){
+
+alert("Yay ❤️ Ishu forgave me! My jaan is the best.");
+
+createConfetti();
+
+};
+
+function createConfetti(){
+
+for(let i=0;i<200;i++){
+
+const confetti = document.createElement("div");
+
+confetti.style.position="fixed";
+confetti.style.width="10px";
+confetti.style.height="10px";
+confetti.style.background="white";
+confetti.style.left=Math.random()*window.innerWidth+"px";
+confetti.style.top="-10px";
+
+document.body.appendChild(confetti);
+
+let fall = setInterval(()=>{
+
+confetti.style.top =
+parseFloat(confetti.style.top)+5+"px";
+
+if(parseFloat(confetti.style.top) >
+window.innerHeight){
+
+clearInterval(fall);
+
+confetti.remove();
+
+}
+
+},20);
+
+}
+
+}
+
+/* FLOATING HEARTS */
+
+const canvas = document.getElementById("hearts");
+
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+
+canvas.height = window.innerHeight;
+
+let hearts = [];
+
+for(let i=0;i<40;i++){
+
+hearts.push({
+
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*4+2,
+speed:Math.random()*1+0.5
+
+});
+
+}
+
+function draw(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="rgba(255,255,255,0.8)";
+
+hearts.forEach(h=>{
+
+ctx.beginPath();
+
+ctx.arc(h.x,h.y,h.size,0,Math.PI*2);
+
+ctx.fill();
+
+h.y -= h.speed;
+
+if(h.y < 0){
+
+h.y = canvas.height;
+
+}
+
+});
+
+requestAnimationFrame(draw);
+
+}
+
+draw();
+
+</script>
+
+</body>
+</html>
